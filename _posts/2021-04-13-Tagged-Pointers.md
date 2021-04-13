@@ -54,6 +54,6 @@ For more reference on tagged pointer strings, check out Mike Ash's super awesome
     OBJC_TAG_NSDate            = 6,
     OBJC_TAG_7                 = 7
     ```
-    *From [objc-internal.h](https://opensource.apple.com/source/objc4/objc4-709/runtime/objc-internal.h.auto.html), discovered via a [Stack Overflow post](http://stackoverflow.com/questions/20362406/tagged-pointers-in-objective-c).*
+    From [objc-internal.h](https://opensource.apple.com/source/objc4/objc4-709/runtime/objc-internal.h.auto.html), discovered via a [Stack Overflow post](http://stackoverflow.com/questions/20362406/tagged-pointers-in-objective-c).
 
 [^2]: [Friday Q&A 2012-07-27: Let's Build Tagged Pointers - by Mike Ash](https://www.mikeash.com/pyblog/friday-qa-2012-07-27-lets-build-tagged-pointers.html)
