@@ -77,7 +77,7 @@ guard let recommendedAudioSettings = avCaptureAudioDataOutput.recommendedAudioSe
     return
 }
 #else
-guard let recommendedAudioSettings = avCaptureAudioDataOutput.recommendedAudioSettingsForAssetWriter(...) as! Dictionary<String, any>? else {
+guard let recommendedAudioSettings = avCaptureAudioDataOutput.recommendedAudioSettingsForAssetWriter(...) as? Dictionary<String, any>? else {
     return
 }
 #endif
