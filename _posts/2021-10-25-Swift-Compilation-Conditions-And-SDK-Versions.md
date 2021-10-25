@@ -4,7 +4,7 @@ title:  "Swift Active Compilation Conditions and SDK Versions"
 ---
 
 ### Objective-C's Preprocessor Macros and Conditional Compilation
-Availability checks can be handy for issues where runtime behavior needs to change, but sometimes you're using an API that simply doesn't exist in an old SDK and thus won't compile, even behind an `@available` check. In Objective-C, we could use preprocessor macros to decide which piece of code to compile based on a macro defined by Apple about SDK availability.
+Availability checks can be handy for issues where runtime behavior needs to change, but sometimes you're using an API that simply doesn't exist or is materially different in an old SDK. Compiling new SDK APIs with an old SDK won't compile, even behind an `@available` check. In Objective-C, we can use preprocessor macros to decide which piece of code to compile based on a macro defined by Apple about SDK availability.
 
 ```obj-c
 #import "AvailabilityVersions.h"
@@ -20,9 +20,9 @@ Availability checks can be handy for issues where runtime behavior needs to chan
 This approach allows the code to compile as expected with and without the new SDK, allowing production builds to use stable versions of Xcode and SDKs while developers can move forward with beta support for new OS releases all with the same code.
 
 ### Swift and Conditional Compilation
-Swift has very limited preprocessing capabilities[^1] which can limit using preprocessor macros for deciding what code compiles in what scenarios. Swift can't simply check the AvailabilityVersions.h declarations and conditionally compile on the fly. Swift does however allow conditional compilation using the `Active Compilation Conditions` build setting in Xcode or the `SWIFT_ACTIVE_COMPILATION_CONDITIONS` macro in an xcconfig file.
+Swift has very limited preprocessing capabilities[^1] which can complicate using preprocessor macros for deciding what code compiles in what scenarios. Swift can't simply check the AvailabilityVersions.h declarations and conditionally compile on the fly. Swift does however allow conditional compilation using the `Active Compilation Conditions` build setting in Xcode or the `SWIFT_ACTIVE_COMPILATION_CONDITIONS` macro in an xcconfig file.
 
-By combining this with some advanced xcconfig features like conditional assignment and variable substitution[^2] along with `SWIFT_ACTIVE_COMPILATION_CONDITIONS` and Xcode's provided `SDK_VERSION_MAJOR`, we can add our own compilation condition only when 
+By combining this with some advanced xcconfig features like conditional assignment and variable substitution[^2] along with `SWIFT_ACTIVE_COMPILATION_CONDITIONS` and Xcode's provided `SDK_VERSION_MAJOR`, we can add our own compilation condition only when compiling against a specific SDK version.
 
 ```
 // Define our macOS 12.0 SDK compilation conditions
@@ -51,14 +51,14 @@ MY_SWIFT_ACTIVE_COMPILATION_CONDITIONS_FOR_SDK_130000[sdk=macos*] = MAC_OS_VERSI
 
 ### A Practical Example
 
-In the macOS Monterey 12.0 SDK, AVFoundation's API was improved to provide types for the dictionary values returned by the API.[^3]
+In the macOS Monterey 12.0 SDK, AVFoundation's `-[AVCaptureAudioDataOutput recommendedAudioSettingsForAssetWriterWithOutputFileType:]` API was improved to provide types for the dictionary returned by the API.[^3]
 
-Before:
+#### Before
 ```obj-c
 - (NSDictionary *)recommendedAudioSettingsForAssetWriterWithOutputFileType:(AVFileType)outputFileType
 ```
 
-After:
+#### After
 ```obj-c
 - (NSDictionary<NSString *,id> *)recommendedAudioSettingsForAssetWriterWithOutputFileType:(AVFileType)outputFileType
 ```
