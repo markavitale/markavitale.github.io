@@ -70,14 +70,14 @@ guard let recommendedAudioSettings = avCaptureAudioDataOutput.recommendedAudioSe
 }
 ```
 
-That code, if compiled against the Monterey SDK will fail to compile as the cast is unnecessary since the API specifies the types directly. To get things to compile properly against both SDKs, we can use our compilation condition to decide which version to compile based on the active SDK.
+That code, if compiled against the Monterey SDK with warnings set as errors will fail to compile with the message `Conditional downcast from '[String : Any]?' to 'Dictionary<String, Any>' does nothing`. To get things to compile properly against both SDKs while keeping warnings as errors turned on, we can use our compilation condition to decide which version to compile based on the active SDK.
 ```swift
 #if MAC_OS_VERSION_12_0_SDK_AVAILABLE
 guard let recommendedAudioSettings = avCaptureAudioDataOutput.recommendedAudioSettingsForAssetWriter(...) else {
     return
 }
 #else
-guard let recommendedAudioSettings = avCaptureAudioDataOutput.recommendedAudioSettingsForAssetWriter(...) as? Dictionary<String, any>? else {
+guard let recommendedAudioSettings = avCaptureAudioDataOutput.recommendedAudioSettingsForAssetWriter(...) as? Dictionary<String, any> else {
     return
 }
 #endif
