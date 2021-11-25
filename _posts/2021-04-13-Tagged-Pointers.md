@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Objective-C's Tagged Pointers and Localized Over-releases"
+permalink: objc-tagged-pointers
 ---
 
 *Disclaimer: This particular class of problem can be more easily solved by using [ARC](https://clang.llvm.org/docs/AutomaticReferenceCounting.html). The code I was working in did not use ARC at the time for a variety of reasons, so manual memory management was necessary.*

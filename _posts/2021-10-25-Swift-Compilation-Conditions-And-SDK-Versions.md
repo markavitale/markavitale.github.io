@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Swift Active Compilation Conditions and SDK Versions"
+permalink: swift-compilation-conditions
 ---
 
 ### Objective-C's Preprocessor Macros and Conditional Compilation
