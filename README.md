@@ -4,6 +4,8 @@ I mostly have this domain for email purposes, but may write use it to drop some 
 
 {% if site.posts.size > 0 %}
 ## Unorganized thoughts
+Follow the [RSS feed]({{ site.url }}/feed.xml) to be notified of new posts.
+
 <ul>
   {% for post in site.posts %}
     <li>

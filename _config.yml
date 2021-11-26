@@ -1,5 +1,6 @@
-title: Mark A Vitale
-description: Unorganized Thoughts
+title: "Mark A Vitale"
+description: "Unorganized Thoughts"
+author: "Mark A Vitale"
 
 defaults:
   -
@@ -9,3 +10,6 @@ defaults:
     values:
       layout: "post"
       author: "Mark A Vitale"
+
+plugins:
+  - jekyll-feed
