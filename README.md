@@ -4,7 +4,6 @@ I mostly have this domain for email purposes, but may write use it to drop some 
 
 {% if site.posts.size > 0 %}
 ## Unorganized thoughts
-Follow the [RSS feed]({{ site.url }}/feed.xml) to be notified of new posts.
 
 <ul>
   {% for post in site.posts %}
@@ -15,6 +14,8 @@ Follow the [RSS feed]({{ site.url }}/feed.xml) to be notified of new posts.
 </ul>
 {% endif %}
 
+Follow the [RSS feed]({{ site.url }}/feed.xml) to be notified of new posts.
+
 ## More organized things with some of my thoughts
 - [Objective-C Coding Guidelines](https://microsoft.github.io/objc-guide/)
 - [Swift Coding Guidelines](https://microsoft.github.io/swift-guide/)
@@ -22,4 +23,3 @@ Follow the [RSS feed]({{ site.url }}/feed.xml) to be notified of new posts.
 ## Where to find me
 - [LinkedIn](https://www.linkedin.com/in/mark-vitale-83139921/)
 - [GitHub](https://github.com/markavitale/)
-
