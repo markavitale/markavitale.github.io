@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  "Swift Active Compilation Conditions and SDK Versions"
 permalink: swift-compilation-conditions
 ---

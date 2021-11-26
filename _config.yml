@@ -1,2 +1,11 @@
 title: Mark A Vitale
 description: Unorganized Thoughts
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Mark A Vitale"

@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  "Objective-C's Tagged Pointers and Localized Over-releases"
 permalink: objc-tagged-pointers
 ---
