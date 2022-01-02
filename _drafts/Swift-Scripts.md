@@ -1,6 +1,6 @@
 ---
 title:  "Executing Swift Package Manager executables from the command line"
-permalink: swift-executables-from-command-line
+permalink: swift-package-executables
 ---
 
 ### Swift Package Manager and Executable Targets
@@ -12,17 +12,13 @@ Let's take a look at the various approaches.
 
 ### Manually build and run the executable
 
-This is conceptually the simplest approach. When running the script, we'll first navigate to the directory that contains the Package.swift we want to execute.
-
-```shell
-cd /path/to/package
-```
-
- Then we'll invoke `swift run` to incrementally build and run the command.
+This is conceptually the simplest approach. We'll invoke `swift run` to incrementally build and run the command. We can optionally run the release configuration of the tool for performance.
      
 ```sh
-swift run ExecutableTargetName [arguments]
+swift run --package-path /path/to/package -c release ExecutableTargetName [arguments]
 ```
+
+Note: You can omit the `--package-path` option if your working directory is the root of the package.
 
 * Pro
     * Simplest approach, no extra deployment steps beyond having access to the source
@@ -32,16 +28,21 @@ swift run ExecutableTargetName [arguments]
     * Multiple steps make it hard to chain with other commands
     * Changes your working directory and requires manually changing back to resume context
     * Some overhead of checking if any changes require the executable to be recompiled since the last run
+    * Swift build ouptut pollutes STDOUT
 
 ### Compile the executable once
-Compile the executable once and copy it somewhere in your path (e.g. `/usr/local/bin`)
+Compile the executable once and copy it somewhere in your path (e.g. `/usr/local/bin`). Note that we can take this opportunity to rename the executable to something more typicaly for the command line.
 
-**TODO: Write the code to do this**
+```shell
+swift build -c release --package-path "/path/to/package"
+cp -f /path/to/package/.build/release/ExecutableTargetName /usr/local/bin/executable-target-name
+```
 
 * Pro
     * Command is available on path making it easy to execute
     * No need to memorize paths, change directories, or even keep the source of the package after building and copying the built binary
     * Easy to chain with other commands
+    * No Swift build ouptut on STDOUT
 * Con
     * Any changes to the package or executable source itself isn't picked up until manually rebuilt and the old binary is replaced
     * Binary lives on your path until you explicitly delete it
@@ -49,12 +50,37 @@ Compile the executable once and copy it somewhere in your path (e.g. `/usr/local
 ### Wrapper script
 Put a custom wrapper script to navigate to the package directory, build and run the swift package, and return to original working directory somewhere in your path (e.g. `/usr/local/bin`)
 
-**TODO: Write the code to do this**
+```shell
+#! /bin/zsh
+
+# cd to the directory of our example executable so we can build and run the package
+PACKAGE_PATH="/path/to/package"
+
+# Execute the build
+# Execute in a subshell to avoid success messages from polluting our command's STDOUT
+# TODO: What happens to stderr here?
+BUILD_STDOUT=$(swift build --configuration release --package-path "$PACKAGE_PATH")
+BUILD_RESULT=$?
+
+if [[ $BUILD_RESULT -eq 0 ]]; then
+    # The build succeeded. Let's now run the script, skipping the build since we've just built
+    swift run --configuration release --package-path "$PACKAGE_PATH" --skip-build "ExecutableTargetName" "$@"
+    
+    # Forward the script run's exit status
+    RUN_RESULT=$?
+    exit $RUN_RESULT
+else
+    # If we failed, print out the build failure STDOUT and forward the build's exist status
+    echo $BUILD_STDOUT
+    exit $BUILD_RESULT
+fi
+```
 
 * Pro
     * Command is available on path making it easy to execute
     * No need to memorize paths or manually change directories
     * Changes to the package or executable source are immediately available
+    * No Swift build ouptut on STDOUT
 * Con
     * Wrapper script lives somewhere in your path until you explicitly delete it
     * Stops working if the source of the swift package moves or is deleted
@@ -64,9 +90,49 @@ Put a custom wrapper script to navigate to the package directory, build and run 
 
 For my purposes, the wrapper script approach has the right balance of pros and cons. Most code I write lives in a single large repo with tools living as local packages in a subdirectory. There is also an `init.sh` file that lives in the root of this repo. Sourcing that file sets up some handy conveniences like adding the repository's scripts folder to the path for easy access to all the command line tools.
 
-With this type of repository structure, we can take things even further and reduce or outright eliminate many cons of the wrapper script approach. Since our wrapper script and swift package are both part of the same repo, we can make changes to the two in lock-step to avoid getting out of sync. And when an executable is obsolete and removed from the repo, the wrapper script can be removed simultaneously.
+With this type of repository structure, we can take things even further and reduce or outright eliminate many cons of the wrapper script approach. Since our wrapper script and swift package are both part of the same repo, we can make changes to the two in lock-step to avoid getting out of sync. And when an executable is obsolete and removed from the repo, the wrapper script can be removed from path simultaneously.
+
+init.sh:
+```shell
+#! /bin/sh
+
+# Get the directory containing this script, from https://unix.stackexchange.com/questions/76505
+export MY_REPO_ROOT=$(exec 2>/dev/null;cd -- $(dirname "$0"); unset PWD; /usr/bin/pwd || /bin/pwd || pwd)
+
+# Add the tools/wrappers directory to our path for easy execution
+export PATH=$PATH:"$MY_REPO_ROOT/tools/wrappers"
+```
+
+Wrapper script for a monorepo in `tools/wrappers/example-executable`:
+```shell
+#! /bin/zsh
+
+# cd to the directory of our example executable so we can build and run the package
+PACKAGE_PATH="$MY_REPO_ROOT/tools/swift/ExampleExecutable"
+
+# Execute the build
+# Execute in a subshell to avoid success messages from polluting our command's STDOUT
+# TODO: What happens to STDERR here?
+BUILD_STDOUT=$(swift build --configuration release --package-path "$PACKAGE_PATH")
+BUILD_RESULT=$?
+
+if [[ $BUILD_RESULT -eq 0 ]]; then
+    # The build succeeded. Let's now run the script, skipping the build since we've just built
+    swift run --configuration release --package-path "$PACKAGE_PATH" --skip-build "ExampleExecutableTarget" "$@"
+    
+    # Forward the script run's exit status
+    RUN_RESULT=$?
+    exit $RUN_RESULT
+else
+    # If we failed, print out the build failure STDOUT and forward the build's exist status
+    echo $BUILD_STDOUT
+    exit $BUILD_RESULT
+fi
+```
 
 ### A more generic approach
+
+If you just have a couple of swift package executables having a few of these individual isn't too bad. If you have a larger suite of tools, you may want to invest in a runner script to reduce duplication.
 
 **TODO: Write the code to do this**
 
