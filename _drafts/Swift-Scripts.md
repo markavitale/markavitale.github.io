@@ -92,6 +92,10 @@ For my purposes, the wrapper script approach has the right balance of pros and c
 
 With this type of repository structure, we can take things even further and reduce or outright eliminate many cons of the wrapper script approach. Since our wrapper script and swift package are both part of the same repo, we can make changes to the two in lock-step to avoid getting out of sync. And when an executable is obsolete and removed from the repo, the wrapper script can be removed from path simultaneously.
 
+### Monorepo tweaks
+
+Some minor tweaks to reduce the cons of the wrapper script approach when operating in a monorepo follow. First we add an init file that develoeprs will source when working in this repo.
+
 init.sh:
 ```shell
 #! /bin/sh
@@ -102,6 +106,8 @@ export MY_REPO_ROOT=$(exec 2>/dev/null;cd -- $(dirname "$0"); unset PWD; /usr/bi
 # Add the tools/wrappers directory to our path for easy execution
 export PATH=$PATH:"$MY_REPO_ROOT/tools/wrappers"
 ```
+
+Next we update our wrapper to use generic paths based on the repo root variable defined in init.sh.
 
 Wrapper script for a monorepo in `tools/wrappers/example-executable`:
 ```shell
@@ -132,8 +138,47 @@ fi
 
 ### A more generic approach
 
-If you just have a couple of swift package executables having a few of these individual isn't too bad. If you have a larger suite of tools, you may want to invest in a runner script to reduce duplication.
+If you just have a couple of swift package executables having a few of these individual isn't too bad. If you have a larger suite of tools, you may want to invest in a generic runner script to reduce duplication.
 
-**TODO: Write the code to do this**
+Generic wrapper for SPM execution in `tools/wrappers/spm-runner`
+```shell
+#! /bin/zsh
 
-- A generic swift-run command that takes the name of the package and optionally the executable within it
+# A simple runner for Swift Package Manager executables in this repo's tools/swift directory.
+# Call this with the first argument being the package name and the second argument being the executable target name.
+# All further arguments will be forwarded to the executable
+
+# Example: spm-runner ExampleExecutable ExampleExecutableTarget [arguments-for-executable]
+
+PACKAGE_NAME="$1"
+EXECUTABLE_TARGET_NAME="$2"
+
+# cd to the directory of our example executable so we can build and run the package
+PACKAGE_PATH="$MY_REPO_ROOT/tools/swift/$PACKAGE_NAME"
+
+# Execute the build
+# Execute in a subshell to avoid success messages from polluting our command's STDOUT
+# TODO: What happens to STDERR here?
+BUILD_STDOUT=$(swift build --configuration release --package-path "$PACKAGE_PATH" --target "$EXECUTABLE_TARGET_NAME")
+BUILD_RESULT=$?
+
+if [[ $BUILD_RESULT -eq 0 ]]; then
+    # The build succeeded so run the script, skipping the build since we've just built, and forwarding on arguments meant for the executable
+    swift run --configuration release --package-path "$PACKAGE_PATH" --skip-build "$EXECUTABLE_TARGET_NAME" "${@:3}"
+    
+    # Forward the script run's exit status
+    RUN_RESULT=$?
+    exit $RUN_RESULT
+else
+    # If we failed, print out the build failure STDOUT and forward the build's exist status
+    echo $BUILD_STDOUT
+    exit $BUILD_RESULT
+fi
+```
+
+Command-specific wrapper in `tools/wrappers/executable-example`
+```shell
+#! /bin/zsh
+"$MY_REPO_ROOT/tools/wrappers/spm-runner" ExampleExecutable ExampleExecutableTarget "$@"
+exit $?
+```
