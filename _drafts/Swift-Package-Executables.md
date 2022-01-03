@@ -18,6 +18,13 @@ This is conceptually the simplest approach. We'll invoke `swift run` to incremen
 swift run --package-path /path/to/package -c release ExecutableTargetName [arguments]
 ```
 
+Executing this works great but the output retains some output from the implicit `swift build` happening which may interfere with commands that expect their stdout to be parsed.
+
+```
+[0/0] Build complete!
+Hello, world!
+```
+
 Note: You can omit the `--package-path` option if your working directory is the root of the package.
 
 * Pro
@@ -36,6 +43,12 @@ Compile the executable once and copy it somewhere in your path (e.g. `/usr/local
 ```shell
 swift build -c release --package-path "/path/to/package"
 cp -f /path/to/package/.build/release/ExecutableTargetName /usr/local/bin/executable-target-name
+```
+
+Calling executable-target-name now no longer invokes a swift build command, so our output is clean of any extra printing from `swift build`.
+
+```
+Hello, world!
 ```
 
 * Pro
@@ -58,7 +71,7 @@ PACKAGE_PATH="/path/to/package"
 
 # Execute the build
 # Execute in a subshell to avoid success messages from polluting our command's STDOUT
-BUILD_STDOUT=$(swift build --configuration release --package-path "$PACKAGE_PATH")
+BUILD_STDOUT=$(swift build --configuration release --package-path "$PACKAGE_PATH" --product "ExecutableTargetName")
 BUILD_RESULT=$?
 
 if [[ $BUILD_RESULT -eq 0 ]]; then
@@ -73,6 +86,12 @@ else
     echo $BUILD_STDOUT
     exit $BUILD_RESULT
 fi
+```
+
+Because of our use of the subshell, successful builds and runs of the script do not show any output from the `swift build` command. Build failures and anything on STDERR coming from the build command will be printed as expected.
+
+```
+Hello, world!
 ```
 
 * Pro
@@ -117,7 +136,7 @@ PACKAGE_PATH="$MY_REPO_ROOT/tools/swift/ExampleExecutable"
 
 # Execute the build
 # Execute in a subshell to avoid success messages from polluting our command's STDOUT
-BUILD_STDOUT=$(swift build --configuration release --package-path "$PACKAGE_PATH")
+BUILD_STDOUT=$(swift build --configuration release --package-path "$PACKAGE_PATH" --product "ExampleExecutableTarget")
 BUILD_RESULT=$?
 
 if [[ $BUILD_RESULT -eq 0 ]]; then
@@ -143,25 +162,25 @@ Generic wrapper for SPM execution in `tools/wrappers/spm-runner`
 #! /bin/zsh
 
 # A simple runner for Swift Package Manager executables in this repo's tools/swift directory.
-# Call this with the first argument being the package name and the second argument being the executable target name.
+# Call this with the first argument being the package name and the second argument being the executable product name.
 # All further arguments will be forwarded to the executable
 
 # Example: spm-runner ExampleExecutable ExampleExecutableTarget [arguments-for-executable]
 
 PACKAGE_NAME="$1"
-EXECUTABLE_TARGET_NAME="$2"
+EXECUTABLE_PRODUCT_NAME="$2"
 
 # cd to the directory of our example executable so we can build and run the package
 PACKAGE_PATH="$MY_REPO_ROOT/tools/swift/$PACKAGE_NAME"
 
 # Execute the build
 # Execute in a subshell to avoid success messages from polluting our command's STDOUT
-BUILD_STDOUT=$(swift build --configuration release --package-path "$PACKAGE_PATH" --target "$EXECUTABLE_TARGET_NAME")
+BUILD_STDOUT=$(swift build --configuration release --package-path "$PACKAGE_PATH" --product "$EXECUTABLE_PRODUCT_NAME")
 BUILD_RESULT=$?
 
 if [[ $BUILD_RESULT -eq 0 ]]; then
     # The build succeeded so run the script, skipping the build since we've just built, and forwarding on arguments meant for the executable
-    swift run --configuration release --package-path "$PACKAGE_PATH" --skip-build "$EXECUTABLE_TARGET_NAME" "${@:3}"
+    swift run --configuration release --package-path "$PACKAGE_PATH" --skip-build "$EXECUTABLE_PRODUCT_NAME" "${@:3}"
     
     # Forward the script run's exit status
     RUN_RESULT=$?
@@ -176,6 +195,7 @@ fi
 Command-specific wrapper in `tools/wrappers/executable-example`
 ```shell
 #! /bin/zsh
+
 "$MY_REPO_ROOT/tools/wrappers/spm-runner" ExampleExecutable ExampleExecutableTarget "$@"
 exit $?
 ```
