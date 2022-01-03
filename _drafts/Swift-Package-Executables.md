@@ -1,5 +1,5 @@
 ---
-title:  "Executing Swift Package Manager executables from the command line"
+title:  "Running Swift Package Manager executables from the command line"
 permalink: swift-package-executables
 ---
 
