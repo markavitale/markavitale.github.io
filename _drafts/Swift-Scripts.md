@@ -28,10 +28,10 @@ Note: You can omit the `--package-path` option if your working directory is the 
     * Multiple steps make it hard to chain with other commands
     * Changes your working directory and requires manually changing back to resume context
     * Some overhead of checking if any changes require the executable to be recompiled since the last run
-    * Swift build ouptut pollutes STDOUT
+    * Swift build output pollutes STDOUT
 
 ### Compile the executable once
-Compile the executable once and copy it somewhere in your path (e.g. `/usr/local/bin`). Note that we can take this opportunity to rename the executable to something more typicaly for the command line.
+Compile the executable once and copy it somewhere in your path (e.g. `/usr/local/bin`). Note that we can take this opportunity to rename the executable to something more typically for the command line.
 
 ```shell
 swift build -c release --package-path "/path/to/package"
@@ -42,7 +42,7 @@ cp -f /path/to/package/.build/release/ExecutableTargetName /usr/local/bin/execut
     * Command is available on path making it easy to execute
     * No need to memorize paths, change directories, or even keep the source of the package after building and copying the built binary
     * Easy to chain with other commands
-    * No Swift build ouptut on STDOUT
+    * No Swift build output on STDOUT
 * Con
     * Any changes to the package or executable source itself isn't picked up until manually rebuilt and the old binary is replaced
     * Binary lives on your path until you explicitly delete it
@@ -79,7 +79,7 @@ fi
     * Command is available on path making it easy to execute
     * No need to memorize paths or manually change directories
     * Changes to the package or executable source are immediately available
-    * No Swift build ouptut on STDOUT
+    * No Swift build output on STDOUT
 * Con
     * Wrapper script lives somewhere in your path until you explicitly delete it
     * Stops working if the source of the swift package moves or is deleted
@@ -93,7 +93,7 @@ With this type of repository structure, we can take things even further and redu
 
 ### Monorepo tweaks
 
-Some minor tweaks to reduce the cons of the wrapper script approach when operating in a monorepo follow. First we add an init file that develoeprs will source in their shell when working in this repo.
+Some minor tweaks to reduce the cons of the wrapper script approach when operating in a monorepo follow. First we add an init file that developers will source in their shell when working in this repo.
 
 `init.sh`:
 ```shell
