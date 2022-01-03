@@ -58,7 +58,6 @@ PACKAGE_PATH="/path/to/package"
 
 # Execute the build
 # Execute in a subshell to avoid success messages from polluting our command's STDOUT
-# TODO: What happens to stderr here?
 BUILD_STDOUT=$(swift build --configuration release --package-path "$PACKAGE_PATH")
 BUILD_RESULT=$?
 
@@ -94,9 +93,9 @@ With this type of repository structure, we can take things even further and redu
 
 ### Monorepo tweaks
 
-Some minor tweaks to reduce the cons of the wrapper script approach when operating in a monorepo follow. First we add an init file that develoeprs will source when working in this repo.
+Some minor tweaks to reduce the cons of the wrapper script approach when operating in a monorepo follow. First we add an init file that develoeprs will source in their shell when working in this repo.
 
-init.sh:
+`init.sh`:
 ```shell
 #! /bin/sh
 
@@ -107,7 +106,7 @@ export MY_REPO_ROOT=$(exec 2>/dev/null;cd -- $(dirname "$0"); unset PWD; /usr/bi
 export PATH=$PATH:"$MY_REPO_ROOT/tools/wrappers"
 ```
 
-Next we update our wrapper to use generic paths based on the repo root variable defined in init.sh.
+Next we update our wrapper to use generic paths based on the repo root variable defined in `init.sh`.
 
 Wrapper script for a monorepo in `tools/wrappers/example-executable`:
 ```shell
@@ -118,7 +117,6 @@ PACKAGE_PATH="$MY_REPO_ROOT/tools/swift/ExampleExecutable"
 
 # Execute the build
 # Execute in a subshell to avoid success messages from polluting our command's STDOUT
-# TODO: What happens to STDERR here?
 BUILD_STDOUT=$(swift build --configuration release --package-path "$PACKAGE_PATH")
 BUILD_RESULT=$?
 
@@ -158,7 +156,6 @@ PACKAGE_PATH="$MY_REPO_ROOT/tools/swift/$PACKAGE_NAME"
 
 # Execute the build
 # Execute in a subshell to avoid success messages from polluting our command's STDOUT
-# TODO: What happens to STDERR here?
 BUILD_STDOUT=$(swift build --configuration release --package-path "$PACKAGE_PATH" --target "$EXECUTABLE_TARGET_NAME")
 BUILD_RESULT=$?
 
@@ -182,3 +179,5 @@ Command-specific wrapper in `tools/wrappers/executable-example`
 "$MY_REPO_ROOT/tools/wrappers/spm-runner" ExampleExecutable ExampleExecutableTarget "$@"
 exit $?
 ```
+
+With this simple runner and wrapper, we can now build and run Swift Package Manager based executables directly from command line, ensuring you're always invoking the latest version of the executable. For a sample repo that implements the monorepo-style wrappers, see [this example repository](https://github.com/markavitale/spm-executable-wrapper-example). Thanks for reading!
