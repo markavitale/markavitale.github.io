@@ -13,7 +13,7 @@ Let's take a look at the various approaches.
 ### Manually build and run the executable
 
 This is conceptually the simplest approach. We'll invoke `swift run` to incrementally build and run the command. We can optionally run the release configuration of the tool for performance.
-     
+
 ```sh
 swift run --package-path /path/to/package -c release ExecutableTargetName [arguments]
 ```
@@ -38,7 +38,7 @@ Note: You can omit the `--package-path` option if your working directory is the 
     * Swift build output pollutes STDOUT
 
 ### Compile the executable once
-Compile the executable once and copy it somewhere in your path (e.g. `/usr/local/bin`). Note that we can take this opportunity to rename the executable to something more typically for the command line.
+Compile the executable once and copy it somewhere in your path (e.g. `/usr/local/bin`). Note that we can take this opportunity to rename the executable to something more idiomatic for the command line.
 
 ```shell
 swift build -c release --package-path "/path/to/package"
@@ -61,7 +61,7 @@ Hello, world!
     * Binary lives on your path until you explicitly delete it
 
 ### Wrapper script
-Put a custom wrapper script to navigate to the package directory, build and run the swift package, and return to original working directory somewhere in your path (e.g. `/usr/local/bin`)
+Put a custom wrapper script in your path (e.g. `/usr/local/bin`) that builds and runs the swift package. The wrapper script can be named something more idiomatic for the command line.
 
 ```shell
 #! /bin/zsh
@@ -155,7 +155,7 @@ fi
 
 ### A more generic approach
 
-If you just have a couple of swift package executables having a few of these individual isn't too bad. If you have a larger suite of tools, you may want to invest in a generic runner script to reduce duplication.
+If you just have a couple of swift package executables having a few of these individual wrapper scripts isn't too bad. If you have a larger suite of tools, you may want to invest in a generic runner script to reduce duplication between wrapper scripts.
 
 Generic wrapper for SPM execution in `tools/wrappers/spm-runner`
 ```shell
