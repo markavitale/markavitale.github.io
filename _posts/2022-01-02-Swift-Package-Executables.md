@@ -66,7 +66,7 @@ Put a custom wrapper script in your path (e.g. `/usr/local/bin`) that builds and
 ```shell
 #! /bin/zsh
 
-# cd to the directory of our example executable so we can build and run the package
+# Define the path to the package
 PACKAGE_PATH="/path/to/package"
 
 # Execute the build
@@ -131,7 +131,7 @@ Wrapper script for a monorepo in `tools/wrappers/example-executable`:
 ```shell
 #! /bin/zsh
 
-# cd to the directory of our example executable so we can build and run the package
+# Define the path to the package
 PACKAGE_PATH="$MY_REPO_ROOT/tools/swift/ExampleExecutable"
 
 # Execute the build
@@ -170,7 +170,7 @@ Generic wrapper for SPM execution in `tools/wrappers/spm-runner`
 PACKAGE_NAME="$1"
 EXECUTABLE_PRODUCT_NAME="$2"
 
-# cd to the directory of our example executable so we can build and run the package
+# Define the path to the package
 PACKAGE_PATH="$MY_REPO_ROOT/tools/swift/$PACKAGE_NAME"
 
 # Execute the build
