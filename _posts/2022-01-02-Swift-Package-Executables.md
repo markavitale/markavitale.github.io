@@ -4,7 +4,7 @@ permalink: swift-package-executables
 ---
 
 ### Swift Package Manager and Executable Targets
-Swift Package Manager is a great way to build command line utilities. It allows for simple scripting to be combined with a strong type system, modularity, and an ecosystem of packages like Swift Argument Parser. Unlike other languages like python, bash, or even standalone Swift scripts, Swift Package Manager executables do require compilation before running. Swift does provide a handy `swift run` command which allows for building and execution of a swift package executable all in one command, but requires your terminal's working directory to be the root of the swift package being run.
+[Swift Package Manager](https://www.swift.org/package-manager/) is a great way to build command line utilities[^1]. It allows for simple scripting to be combined with a strong type system, modularity, and an ecosystem of packages like [Swift Argument Parser](https://github.com/apple/swift-argument-parser). Unlike other languages like python, bash, or even standalone Swift scripts, Swift Package Manager executables do require compilation before running. Swift does provide a handy `swift run` command which allows for building and execution of a swift package executable all in one command, but produces some extra output from building that may be undesirable. `swift run` also requires the working directory to contain the relevant `Package.swift` file or for that directory to be explicitly passed in via the `--package-path` option.
 
 There are a few ways to approach building and running your executable: manually building and running the executable, compiling the executable once and storing it somewhere in your path, and writing a wrapper script that builds and runs your executable on demand.
 
@@ -201,3 +201,7 @@ exit $?
 ```
 
 With this simple runner and wrapper, we can now build and run Swift Package Manager based executables directly from command line, ensuring you're always invoking the latest version of the executable. For a sample repo that implements the monorepo-style wrappers, see [this example repository](https://github.com/markavitale/spm-executable-wrapper-example). Thanks for reading!
+
+---
+
+[^1]: [Building a command line tool using the Swift Package Manager - Swift by Sundell](https://www.swiftbysundell.com/articles/building-a-command-line-tool-using-the-swift-package-manager/)
