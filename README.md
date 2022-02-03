@@ -23,3 +23,8 @@ Follow the [RSS feed]({{ site.url }}/feed.xml) to be notified of new posts.
 ## Where to find me
 - [LinkedIn](https://www.linkedin.com/in/mark-vitale-83139921/)
 - [GitHub](https://github.com/markavitale/)
+
+## Support me
+To show your support for this site and encourage more articles you can [buy me a bourbon](https://www.buymeacoffee.com/markavitale).
+
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="markavitale" data-color="#FF5F5F" data-emoji="🥃"  data-font="Arial" data-text="Buy me a bourbon" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
