@@ -18,8 +18,14 @@ You can run Rocket Calendar automatically when logging in and setup a global key
 
 ## Privacy Policy
 
-Rocket Calendar does not collect or store any data. There is a link in the app to an external website that has its own privacy policy and data collection policies. Interactions with any external websites are not covered by this privacy policy.
+Rocket Calendar does not collect or store any data.
 
 ## Feedback
 
 For any other feedback or questions, please reach out to [rocketcalendar@outlook.com](mailto:rocketcalendar@outlook.com?Subject=Rocket%20Calendar%20Feedback).
+
+## Support the developer
+
+Rocket Calendar is completely free and ad-free. To show your support for this app and its donation-based business model, you can [buy me a bourbon](https://www.buymeacoffee.com/markavitale).
+
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="markavitale" data-color="#FF5F5F" data-emoji="🥃"  data-font="Arial" data-text="Buy me a bourbon" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
