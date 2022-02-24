@@ -1,6 +1,8 @@
 # Rocket Calendar
 
-Rocket Calendar is a speedy, always-accessible calendar that lives in your menu bar. You can quickly check dates, navigate between months, and even copy the selected date to your clipboard! Re-selecting today's date is always a single click away.
+![Rocket Calendar Icon](/assets/images/RocketCalendar/RocketCalendarIcon.png){: width="200" }
+
+Rocket Calendar is a speedy, always-accessible calendar that lives in your menu bar. You can quickly check dates, navigate between months, and even copy the selected date to your clipboard! Heading back to today's date is always a single click away.
 
 ![Dark Mode Screenshot](/assets/images/RocketCalendar/ScreenshotDark.jpg)
 
@@ -10,7 +12,9 @@ Dark and Light appearances are both supported and you can change the color of th
 
 The format for the copied date can be customized by changing your date format in System Preferences.
 
-You can run Rocket Calendar automatically by adding it to your Login Items in System Preferences.
+You can run Rocket Calendar automatically when logging in and setup a global keyboard shortcut for launching the calendar menu in the Preferences menu.
+
+![Preferences Pane Screenshot](/assets/images/RocketCalendar/PreferencesPane.jpg){: width="500" }
 
 ## Privacy Policy
 
