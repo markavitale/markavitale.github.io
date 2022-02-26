@@ -1,6 +1,8 @@
+![Rocket Calendar Icon](/assets/images/RocketCalendar/RocketCalendarIcon.png){: width="200" }
+
 # Rocket Calendar
 
-![Rocket Calendar Icon](/assets/images/RocketCalendar/RocketCalendarIcon.png){: width="200" }
+[![Download on the Mac App Store](/assets/images/RocketCalendar/Download_on_the_Mac_App_Store_Badge_US-UK_RGB_blk_092917.svg){: width="250"}](https://apps.apple.com/us/app/id1610422673)
 
 Rocket Calendar is a speedy, always-accessible calendar that lives in your menu bar. You can quickly check dates, navigate between months, and even copy the selected date to your clipboard! Heading back to today's date is always a single click away.
 
