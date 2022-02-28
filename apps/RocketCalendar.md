@@ -62,8 +62,16 @@ Rocket Calendar does not collect or store any data or personal information.
 
 For any other feedback or questions, please reach out to [rocketcalendar@outlook.com](mailto:rocketcalendar@outlook.com?Subject=Rocket%20Calendar%20Feedback).
 
+## Acknowledgments
+
+Rocket Calendar is only possible through the use of some awesome open source projects.
+
+* [Fluent UI Apple](https://github.com/microsoft/fluentui-apple) by Microsoft provides the ui for the calendar itself.
+* [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts) by Sindre Sorhus enables the global keyboard shortcut for launching the menu.
+* [LaunchAtLogin](https://github.com/sindresorhus/LaunchAtLogin) by Sindre Sorhus lets the app launch automatically.
+
 ## Support the Developer
 
-Rocket Calendar is completely free and ad-free. To show your support for this app and its donation-based business model, you can [buy me a bourbon](https://www.buymeacoffee.com/markavitale).
+Rocket Calendar is completely free and ad-free. To show your support for this app and its donation-based business model, you can [buy me a bourbon](https://www.buymeacoffee.com/markavitale). Also consider donating to [Sindre Sorhus](https://sindresorhus.com/donate) whose libraries make this app possible.
 
 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="markavitale" data-color="#FF5F5F" data-emoji="🥃"  data-font="Arial" data-text="Buy me a bourbon" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
