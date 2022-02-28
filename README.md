@@ -31,6 +31,7 @@ Follow the [RSS feed]({{ site.url }}/feed.xml) to be notified of new posts.
 ## Where to find me
 - [LinkedIn](https://www.linkedin.com/in/mark-vitale-83139921/)
 - [GitHub](https://github.com/markavitale/)
+- [Twitter](https://twitter.com/MarkAVitale)
 
 ## Support me
 To show your support for this site and encourage more articles you can [buy me a bourbon](https://www.buymeacoffee.com/markavitale).
