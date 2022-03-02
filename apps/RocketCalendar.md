@@ -12,13 +12,17 @@ Rocket Calendar is a speedy, always-accessible calendar that lives in your menu 
 
 ## Frequently Asked Questions
 
-### How do I change the theme of the menu?
+<details markdown=1>
+<summary markdown=0><h3 style="display:inline">How do I change the theme of the menu?</h3></summary>
 
 Dark and Light appearances are both supported and you can change the color of the selected date by changing your system accent color. All of these settings are available in System Preferences on the General tab.
 
 ![System Preferences General Tab Screenshot](/assets/images/RocketCalendar/SystemPreferencesGeneral.jpg)
 
-### How do I change the format of the copied date?
+</details>
+
+<details markdown=1>
+<summary markdown=0><h3 style="display:inline">How do I change the format of the copied date?</h3></summary>
 
 The format for the copied date can be customized by changing the "short" date format in System Preferences.
 1. Open System Preferences
@@ -30,9 +34,10 @@ The format for the copied date can be customized by changing the "short" date fo
 Note: Changing this will modify how the date is displayed throughout the OS and other apps
 
 ![Date Format Settings](/assets/images/RocketCalendar/SystemPreferencesDateFormat.jpg)
+</details>
 
-### Can I have Rocket Calendar launch automatically when I start my computer?
-
+<details markdown=1>
+<summary markdown=0><h3 style="display:inline">Can I have Rocket Calendar launch automatically when I start my computer?</h3></summary>
 You can have Rocket Calendar launch automatically when you log in.
 
 1. Open the Rocket Calendar menu
@@ -40,8 +45,10 @@ You can have Rocket Calendar launch automatically when you log in.
 1. In the Preferences window, check the box for "Launch Rocket Calendar automatically"
 
 ![Preferences Pane Screenshot](/assets/images/RocketCalendar/PreferencesPane.jpg){: width="500" }
+</details>
 
-### Can I set up a global keyboard shortcut for opening Rocket Calendar?
+<details markdown=1>
+<summary markdown=0><h3 style="display:inline">Can I set up a global keyboard shortcut for opening Rocket Calendar?</h3></summary>
 
 To setup a global keyboard shortcut for Rocket Calendar:
 
@@ -53,6 +60,7 @@ To setup a global keyboard shortcut for Rocket Calendar:
 Note: To remove the global keyboard shortcut, simply press the small close button next to the recorded shortcut.
 
 ![Preferences Pane Screenshot](/assets/images/RocketCalendar/PreferencesPane.jpg){: width="500" }
+</details>
 
 ## Privacy Policy
 
