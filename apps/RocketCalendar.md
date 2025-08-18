@@ -15,17 +15,17 @@ Rocket Calendar is a speedy, always-accessible calendar that lives in your menu 
 <details markdown=1>
 <summary><h3 style="display:inline">How do I change the theme of the menu?</h3></summary>
 
-Dark and Light appearances are both supported and you can change the color of the selected date by changing your system accent color. All of these settings are available in System Preferences on the General tab.
+Dark and Light appearances are both supported and you can change the color of the selected date by changing your system accent color. All of these settings are available in System Settings on the General tab.
 
-![System Preferences General Tab Screenshot](/assets/images/RocketCalendar/SystemPreferencesGeneral.jpg)
+![System Settings General Tab Screenshot](/assets/images/RocketCalendar/SystemPreferencesGeneral.jpg)
 
 </details>
 
 <details markdown=1>
 <summary><h3 style="display:inline">How do I change the format of the copied date?</h3></summary>
 
-The format for the copied date can be customized by changing the "short" date format in System Preferences.
-1. Open System Preferences
+The format for the copied date can be customized by changing the "short" date format in System Settings.
+1. Open System Settings
 1. Go to the "Language and Region" section
 1. Select the "Advanced..." button on that page
 1. Select the "Dates" tab along the top of the pane
@@ -60,6 +60,19 @@ To setup a global keyboard shortcut for Rocket Calendar:
 Note: To remove the global keyboard shortcut, simply press the small close button next to the recorded shortcut.
 
 ![Preferences Pane Screenshot](/assets/images/RocketCalendar/PreferencesPane.jpg){: width="500" }
+
+</details>
+
+<details markdown=1>
+<summary><h3 style="display:inline">How do I change the first day of the week displayed?</h3></summary>
+
+The first day of the week is decided by your macOS System settings.
+1. Follow [Apple's directions](https://support.apple.com/guide/mac-help/change-how-dates-times-and-more-appear-on-mac-mh27073/) for customizing the First Day of the Week
+1. Restart Rocket Calendar to pick up the changes
+
+Note: Changing this will modify how the date is displayed throughout the OS and other apps
+
+![Date Format Settings](/assets/images/RocketCalendar/SystemPreferencesDateFormat.jpg)
 </details>
 
 ## Privacy Policy
