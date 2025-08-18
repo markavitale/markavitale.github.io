@@ -70,9 +70,7 @@ The first day of the week is decided by your macOS System settings.
 1. Follow [Apple's directions](https://support.apple.com/guide/mac-help/change-how-dates-times-and-more-appear-on-mac-mh27073/) for customizing the First Day of the Week
 1. Restart Rocket Calendar to pick up the changes
 
-Note: Changing this will modify how the date is displayed throughout the OS and other apps
-
-![Date Format Settings](/assets/images/RocketCalendar/SystemPreferencesDateFormat.jpg)
+Note: Changing this will modify the first day of the week in calendars throughout the OS and other apps
 </details>
 
 ## Privacy Policy
