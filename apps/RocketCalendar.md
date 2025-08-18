@@ -41,8 +41,8 @@ Note: Changing this will modify how the date is displayed throughout the OS and 
 You can have Rocket Calendar launch automatically when you log in.
 
 1. Open the Rocket Calendar menu
-1. Select "Preferences"
-1. In the Preferences window, check the box for "Launch Rocket Calendar automatically"
+1. Select "Settings..."
+1. In the Settings window, check the box for "Launch Rocket Calendar automatically"
 
 ![Preferences Pane Screenshot](/assets/images/RocketCalendar/PreferencesPane.jpg){: width="500" }
 </details>
@@ -53,8 +53,8 @@ You can have Rocket Calendar launch automatically when you log in.
 To setup a global keyboard shortcut for Rocket Calendar:
 
 1. Open the Rocket Calendar menu
-1. Select "Preferences"
-1. In the Preferences window, click Record Shortcut
+1. Select "Settings..."
+1. In the Settings window, click Record Shortcut
 1. Press the keyboard shortcut you want to use to launch the Rocket Calendar Menu. ⇧⌘C is a commonly used shortcut but any valid combo is allowed.
 
 Note: To remove the global keyboard shortcut, simply press the small close button next to the recorded shortcut.
